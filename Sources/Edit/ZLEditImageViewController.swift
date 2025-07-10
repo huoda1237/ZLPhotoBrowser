@@ -1827,6 +1827,7 @@ open class ZLEditImageViewController: UIViewController {
         
         editImage = image
         imageView.image = image
+        
         mosaicImageLayerMaskLayer?.path = nil
         
         return image
