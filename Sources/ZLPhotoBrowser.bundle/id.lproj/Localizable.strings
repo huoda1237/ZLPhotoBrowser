@@ -17,6 +17,11 @@
 "brightness" = "Kecerahan";
 "contrast" = "Kontras";
 "saturation" = "Saturasi";
+"exposure" = "Exposure";
+"sharpness" = "Sharpness";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "Foto";
 "preview" = "Pratinjau";

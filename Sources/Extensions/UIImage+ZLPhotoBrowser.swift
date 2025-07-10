@@ -471,16 +471,65 @@ public extension ZLPhotoBrowserWrapper where Base: UIImage {
     ///   - brightness: value in [-1, 1]
     ///   - contrast: value in [-1, 1]
     ///   - saturation: value in [-1, 1]
-    func adjust(brightness: Float, contrast: Float, saturation: Float) -> UIImage? {
+    func adjust(brightness: Float,
+                contrast: Float,
+                saturation: Float,
+                exposure: Float,
+                sharpness: Float,
+                temperature: Float,
+                tint: Float,
+                vignette: Float) -> UIImage? {
         guard let ciImage = toCIImage() else {
             return base
         }
         
+        //曝光度
+        guard let exposureFilter = CIFilter(name: "CIExposureAdjust") else { return self.base }
+        exposureFilter.setValue(ciImage, forKey: kCIInputImageKey)
+        exposureFilter.setValue(ZLEditImageConfiguration.AdjustTool.exposure.filterValue(exposure),
+                                forKey: ZLEditImageConfiguration.AdjustTool.exposure.key)
+        guard let exposureOutput = exposureFilter.outputImage else { return self.base }
+        
+        
+        //锐化
+        guard let sharpnessFilter = CIFilter(name: "CISharpenLuminance") else { return self.base }
+        sharpnessFilter.setValue(exposureOutput, forKey: kCIInputImageKey)
+        sharpnessFilter.setValue(ZLEditImageConfiguration.AdjustTool.sharpness.filterValue(sharpness),
+                                 forKey: ZLEditImageConfiguration.AdjustTool.sharpness.key)
+        guard let sharpnessOutput = sharpnessFilter.outputImage else { return self.base }
+        
+        
+        // 色温色调
+        guard let tempFilter = CIFilter(name: "CITemperatureAndTint") else { return self.base }
+        tempFilter.setValue(sharpnessOutput, forKey: kCIInputImageKey)
+        //x 是色温（推荐 4000~7000），y 是色调（通常设为 0）
+        let temperatureVector = CIVector(x: CGFloat(ZLEditImageConfiguration.AdjustTool.temperature.filterValue(temperature)),
+                                         y: CGFloat(ZLEditImageConfiguration.AdjustTool.tint.filterValue(tint)))
+        //默认6500
+        let neutral = CIVector(x: CGFloat(6500), y: 0)
+        tempFilter.setValue(neutral, forKey: "inputNeutral")
+        tempFilter.setValue(temperatureVector, forKey: ZLEditImageConfiguration.AdjustTool.temperature.key)
+        guard let tempOutput = tempFilter.outputImage else { return self.base }
+        
+        //晕影
+        guard let vignetteFilter = CIFilter(name: "CIVignetteEffect")  else { return self.base }
+        let centerPoint = CGPoint(x: ciImage.extent.midX, y: ciImage.extent.midY)
+        vignetteFilter.setValue(tempOutput, forKey: kCIInputImageKey)
+        vignetteFilter.setValue(ZLEditImageConfiguration.AdjustTool.vignette.filterValue(vignette),
+                                forKey: ZLEditImageConfiguration.AdjustTool.vignette.key)
+        vignetteFilter.setValue(1.0 * Float(min(ciImage.extent.width, ciImage.extent.height)), forKey: kCIInputRadiusKey)
+        vignetteFilter.setValue(CIVector(x: centerPoint.x, y: centerPoint.y), forKey: kCIInputCenterKey)
+        guard let vignetteOutput = vignetteFilter.outputImage else { return self.base }
+        
+        //亮度，对比度，饱和度
         let filter = CIFilter(name: "CIColorControls")
-        filter?.setValue(ciImage, forKey: kCIInputImageKey)
-        filter?.setValue(ZLEditImageConfiguration.AdjustTool.brightness.filterValue(brightness), forKey: ZLEditImageConfiguration.AdjustTool.brightness.key)
-        filter?.setValue(ZLEditImageConfiguration.AdjustTool.contrast.filterValue(contrast), forKey: ZLEditImageConfiguration.AdjustTool.contrast.key)
-        filter?.setValue(ZLEditImageConfiguration.AdjustTool.saturation.filterValue(saturation), forKey: ZLEditImageConfiguration.AdjustTool.saturation.key)
+        filter?.setValue(vignetteOutput, forKey: kCIInputImageKey)
+        filter?.setValue(ZLEditImageConfiguration.AdjustTool.brightness.filterValue(brightness),
+                         forKey: ZLEditImageConfiguration.AdjustTool.brightness.key)
+        filter?.setValue(ZLEditImageConfiguration.AdjustTool.contrast.filterValue(contrast),
+                         forKey: ZLEditImageConfiguration.AdjustTool.contrast.key)
+        filter?.setValue(ZLEditImageConfiguration.AdjustTool.saturation.filterValue(saturation),
+                         forKey: ZLEditImageConfiguration.AdjustTool.saturation.key)
         let outputCIImage = filter?.outputImage
         return outputCIImage?.zl.toUIImage()
     }

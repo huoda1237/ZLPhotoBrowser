@@ -201,6 +201,26 @@ class ZLAdjustToolCell: UICollectionViewCell {
                 imageView.image = .zl.getImage("zl_saturation")
                 imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
                 nameLabel.text = localLanguageTextValue(.saturation)
+            case .exposure:
+                imageView.image = .zl.getImage("zl_saturation")
+                imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
+                nameLabel.text = localLanguageTextValue(.exposure)
+            case .sharpness:
+                imageView.image = .zl.getImage("zl_saturation")
+                imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
+                nameLabel.text = localLanguageTextValue(.sharpness)
+            case .temperature:
+                imageView.image = .zl.getImage("zl_saturation")
+                imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
+                nameLabel.text = localLanguageTextValue(.temperature)
+            case .tint:
+                imageView.image = .zl.getImage("zl_saturation")
+                imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
+                nameLabel.text = localLanguageTextValue(.tint)
+            case .vignette:
+                imageView.image = .zl.getImage("zl_saturation")
+                imageView.highlightedImage = .zl.getImage("zl_saturation_selected")
+                nameLabel.text = localLanguageTextValue(.vignette)
             }
             if let color = UIColor.zl.imageEditorToolIconTintColor {
                 imageView.highlightedImage = imageView.highlightedImage?

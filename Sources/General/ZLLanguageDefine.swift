@@ -240,6 +240,17 @@ public struct ZLLocalLanguageKey: Hashable {
     /// Saturation (饱和度)
     public static let saturation = ZLLocalLanguageKey(rawValue: "saturation")
     
+    /// exposure (曝光度)
+    public static let exposure = ZLLocalLanguageKey(rawValue: "exposure")
+    /// sharpness (锐化)
+    public static let sharpness = ZLLocalLanguageKey(rawValue: "sharpness")
+    /// temperature (色温)
+    public static let temperature = ZLLocalLanguageKey(rawValue: "temperature")
+    /// tint (色调)
+    public static let tint = ZLLocalLanguageKey(rawValue: "tint")
+    /// vignette (晕影)
+    public static let vignette = ZLLocalLanguageKey(rawValue: "vignette")
+    
     /// Preview (预览)
     public static let preview = ZLLocalLanguageKey(rawValue: "preview")
     

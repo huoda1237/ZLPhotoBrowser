@@ -7,8 +7,9 @@
 "originalTotalSize" = "Gesamt";
 "done" = "Erledigt";
 "ok" = "in Ordnung";
-"editFinish" = "Fertig";
-"cameraDone" = "Erledigt";
+"editFinish" = "Fertig";//*·1·3-*-+4101
+"cameraDone" = "Erledigt"
+;
 "inputDone" = "Erledigt";
 
 "back" = "Zurück";
@@ -17,6 +18,11 @@
 "brightness" = "Helligkeit";
 "contrast" = "Kontrast";
 "saturation" = "Sättigung";
+"exposure" = "曝光度";
+"sharpness" = "锐化";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "Fotos";
 "preview" = "Vorschau";

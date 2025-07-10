@@ -17,6 +17,11 @@
 "brightness" = "밝기";
 "contrast" = "대비";
 "saturation" = "채도";
+"exposure" = "Exposure";
+"sharpness" = "Sharpness";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "사진";
 "preview" = "미리 보기";

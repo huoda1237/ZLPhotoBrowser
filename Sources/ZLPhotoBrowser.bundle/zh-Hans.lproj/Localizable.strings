@@ -17,6 +17,11 @@
 "brightness" = "亮度";
 "contrast" = "对比度";
 "saturation" = "饱和度";
+"exposure" = "曝光度";
+"sharpness" = "锐化";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "照片";
 "preview" = "预览";

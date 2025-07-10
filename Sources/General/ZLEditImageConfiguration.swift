@@ -202,6 +202,11 @@ public extension ZLEditImageConfiguration {
         case brightness
         case contrast
         case saturation
+        case exposure//曝光
+        case sharpness//锐化
+        case temperature//色温
+        case tint//色调
+        case vignette//晕影
         
         var key: String {
             switch self {
@@ -211,10 +216,21 @@ public extension ZLEditImageConfiguration {
                 return kCIInputContrastKey
             case .saturation:
                 return kCIInputSaturationKey
+            case .exposure:
+                return kCIInputEVKey
+            case .sharpness:
+                return kCIInputSharpnessKey
+            case .temperature:
+                return "inputTargetNeutral"
+            case .tint:
+                return "inputTargetNeutral"
+            case .vignette:
+                return kCIInputIntensityKey
             }
         }
         
         func filterValue(_ value: Float) -> Float {
+            NSLog("这个数值时：%f", value)
             switch self {
             case .brightness:
                 // 亮度范围-1---1，默认0，这里除以3，取 -0.33---0.33
@@ -231,6 +247,32 @@ public extension ZLEditImageConfiguration {
             case .saturation:
                 // 饱和度范围0---2，默认1
                 return value + 1
+            case .exposure:
+                //曝光值-1～1
+                return value
+            case .sharpness:
+                //锐化值-1～1
+                return value
+            case .temperature:
+                //色温 4000-7000,默认值6500
+                if value < 0 {
+                    return (6500 - 2500 * value)
+                } else {
+                    return (6500 + 500 * value)
+                }
+            case .tint:
+                //色调-150~150,负值偏绿，正直偏红
+                return -value * 150
+            case .vignette:
+                //晕影 0 ~ 2 越大越暗
+//                if value < 0 {
+//                    return value + 1
+//                }
+                if value >= 0 {
+                    return value
+                } else {
+                    return value * 0.05
+                }
             }
         }
     }

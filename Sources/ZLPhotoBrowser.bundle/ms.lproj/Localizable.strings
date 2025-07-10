@@ -17,6 +17,11 @@
 "brightness" = "Kecerahan";
 "contrast" = "Contrast";
 "saturation" = "Ketepuan";
+"exposure" = "Exposure";
+"sharpness" = "Sharpness";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "Gambar";
 "preview" = "Pratonton";

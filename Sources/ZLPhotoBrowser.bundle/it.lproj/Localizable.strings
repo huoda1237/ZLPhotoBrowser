@@ -17,6 +17,11 @@
 "brightness" = "Luminosità";
 "contrast" = "Contrasto";
 "saturation" = "Saturazione";
+"exposure" = "Exposure";
+"sharpness" = "Sharpness";
+"temperature" = "色温";
+"tint" = "色调";
+"vignette"="晕影";
 
 "photo" = "Fotografie";
 "preview" = "Anteprima";

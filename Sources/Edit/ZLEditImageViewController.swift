@@ -42,15 +42,33 @@ public struct ZLAdjustStatus {
     var brightness: Float = 0
     var contrast: Float = 0
     var saturation: Float = 0
+    var exposure: Float = 0
+    var sharpness: Float = 0
+    var temperature:Float = 0
+    var tint:Float = 0
+    var vignette:Float = 0
+    
     
     var allValueIsZero: Bool {
-        brightness == 0 && contrast == 0 && saturation == 0
+        brightness == 0 && contrast == 0 && saturation == 0 && exposure == 0 && sharpness == 0 && temperature == 0 && tint == 0 && vignette == 0
     }
     
-    public init(brightness: Float = 0, contrast: Float = 0, saturation: Float = 0) {
+    public init(brightness: Float = 0,
+                contrast: Float = 0,
+                saturation: Float = 0,
+                exposure:Float = 0,
+                shareness:Float = 0,
+                temperature:Float = 0,
+                tint:Float = 0,
+                vignette:Float = 0) {
         self.brightness = brightness
         self.contrast = contrast
         self.saturation = saturation
+        self.exposure = exposure
+        self.sharpness = shareness
+        self.temperature = temperature
+        self.tint = tint
+        self.vignette = vignette
     }
 }
 
@@ -833,7 +851,12 @@ open class ZLEditImageViewController: UIViewController {
             editImage = editImage.zl.adjust(
                 brightness: currentAdjustStatus.brightness,
                 contrast: currentAdjustStatus.contrast,
-                saturation: currentAdjustStatus.saturation
+                saturation: currentAdjustStatus.saturation,
+                exposure: currentAdjustStatus.exposure,
+                sharpness: currentAdjustStatus.sharpness,
+                temperature: currentAdjustStatus.temperature,
+                tint: currentAdjustStatus.tint,
+                vignette: currentAdjustStatus.vignette
             ) ?? editImage
             
             let adjustLayout = ZLCollectionViewFlowLayout()
@@ -1125,6 +1148,16 @@ open class ZLEditImageViewController: UIViewController {
             adjustSlider?.value = currentAdjustStatus.contrast
         case .saturation:
             adjustSlider?.value = currentAdjustStatus.saturation
+        case .exposure:
+            adjustSlider?.value = currentAdjustStatus.exposure
+        case .sharpness:
+            adjustSlider?.value = currentAdjustStatus.sharpness
+        case .temperature:
+            adjustSlider?.value = currentAdjustStatus.temperature
+        case .tint:
+            adjustSlider?.value = currentAdjustStatus.tint
+        case .vignette:
+            adjustSlider?.value = currentAdjustStatus.tint
         }
     }
     
@@ -1394,6 +1427,36 @@ open class ZLEditImageViewController: UIViewController {
             }
             
             currentAdjustStatus.saturation = value
+        case .exposure:
+            if currentAdjustStatus.exposure == value {
+                return
+            }
+            
+            currentAdjustStatus.exposure = value
+        case .sharpness:
+            if currentAdjustStatus.sharpness == value {
+                return
+            }
+            
+            currentAdjustStatus.sharpness = value
+        case .temperature:
+            if currentAdjustStatus.temperature == value {
+                return
+            }
+            
+            currentAdjustStatus.temperature = value
+        case .tint:
+            if currentAdjustStatus.tint == value {
+                return
+            }
+            
+            currentAdjustStatus.tint = value
+        case .vignette:
+            if currentAdjustStatus.vignette == value {
+                return
+            }
+            
+            currentAdjustStatus.vignette = value
         }
         
         adjustStatusChanged()
@@ -1403,7 +1466,13 @@ open class ZLEditImageViewController: UIViewController {
         let resultImage = editImageAdjustRef?.zl.adjust(
             brightness: currentAdjustStatus.brightness,
             contrast: currentAdjustStatus.contrast,
-            saturation: currentAdjustStatus.saturation
+            saturation: currentAdjustStatus.saturation,
+            exposure: currentAdjustStatus.exposure,
+            sharpness: currentAdjustStatus.sharpness,
+            temperature: currentAdjustStatus.temperature,
+            tint: currentAdjustStatus.tint,
+            vignette: currentAdjustStatus.vignette
+            
         )
         
         guard let resultImage else { return }
@@ -1621,7 +1690,12 @@ open class ZLEditImageViewController: UIViewController {
             return image.zl.adjust(
                 brightness: currentAdjustStatus.brightness,
                 contrast: currentAdjustStatus.contrast,
-                saturation: currentAdjustStatus.saturation
+                saturation: currentAdjustStatus.saturation,
+                exposure: currentAdjustStatus.exposure,
+                sharpness: currentAdjustStatus.sharpness,
+                temperature: currentAdjustStatus.temperature,
+                tint: currentAdjustStatus.tint,
+                vignette: currentAdjustStatus.vignette
             ) ?? image
         }
         
@@ -1684,7 +1758,12 @@ open class ZLEditImageViewController: UIViewController {
                     drawImage = drawImage?.zl.adjust(
                         brightness: currentAdjustStatus.brightness,
                         contrast: currentAdjustStatus.contrast,
-                        saturation: currentAdjustStatus.saturation
+                        saturation: currentAdjustStatus.saturation,
+                        exposure: currentAdjustStatus.exposure,
+                        sharpness: currentAdjustStatus.sharpness,
+                        temperature: currentAdjustStatus.temperature,
+                        tint: currentAdjustStatus.tint,
+                        vignette: currentAdjustStatus.vignette
                     )
                 }
                 
