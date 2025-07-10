@@ -478,7 +478,8 @@ public extension ZLPhotoBrowserWrapper where Base: UIImage {
                 sharpness: Float,
                 temperature: Float,
                 tint: Float,
-                vignette: Float) -> UIImage? {
+                vignette: Float,
+                vibrance: Float) -> UIImage? {
         guard let ciImage = toCIImage() else {
             return base
         }
@@ -521,9 +522,16 @@ public extension ZLPhotoBrowserWrapper where Base: UIImage {
         vignetteFilter.setValue(CIVector(x: centerPoint.x, y: centerPoint.y), forKey: kCIInputCenterKey)
         guard let vignetteOutput = vignetteFilter.outputImage else { return self.base }
         
+        //自然饱和度
+        guard let vibranceFilter = CIFilter(name: "CIVibrance") else { return nil }
+        vibranceFilter.setValue(vignetteOutput, forKey: kCIInputImageKey)
+        vibranceFilter.setValue(ZLEditImageConfiguration.AdjustTool.vibrance.filterValue(vibrance),
+                                forKey:ZLEditImageConfiguration.AdjustTool.vibrance.key)
+        guard let vibranceOutput = vibranceFilter.outputImage else { return self.base }
+        
         //亮度，对比度，饱和度
         let filter = CIFilter(name: "CIColorControls")
-        filter?.setValue(vignetteOutput, forKey: kCIInputImageKey)
+        filter?.setValue(vibranceOutput, forKey: kCIInputImageKey)
         filter?.setValue(ZLEditImageConfiguration.AdjustTool.brightness.filterValue(brightness),
                          forKey: ZLEditImageConfiguration.AdjustTool.brightness.key)
         filter?.setValue(ZLEditImageConfiguration.AdjustTool.contrast.filterValue(contrast),

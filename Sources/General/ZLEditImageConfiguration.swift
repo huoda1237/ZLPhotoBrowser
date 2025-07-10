@@ -207,6 +207,7 @@ public extension ZLEditImageConfiguration {
         case temperature//色温
         case tint//色调
         case vignette//晕影
+        case vibrance//自然饱和度
         
         var key: String {
             switch self {
@@ -226,6 +227,8 @@ public extension ZLEditImageConfiguration {
                 return "inputTargetNeutral"
             case .vignette:
                 return kCIInputIntensityKey
+            case .vibrance:
+                return "inputAmount"
             }
         }
         
@@ -265,14 +268,14 @@ public extension ZLEditImageConfiguration {
                 return -value * 150
             case .vignette:
                 //晕影 0 ~ 2 越大越暗
-//                if value < 0 {
-//                    return value + 1
-//                }
                 if value >= 0 {
                     return value
                 } else {
                     return value * 0.05
                 }
+            case .vibrance:
+                //自然饱和度-1～1
+                return value
             }
         }
     }

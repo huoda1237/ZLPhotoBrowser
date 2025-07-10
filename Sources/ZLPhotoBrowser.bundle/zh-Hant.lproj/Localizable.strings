@@ -22,6 +22,7 @@
 "temperature" = "色温";
 "tint" = "色调";
 "vignette"="晕影";
+"vibrance"="自然饱和度";
 
 "photo" = "照片";
 "preview" = "預覽";

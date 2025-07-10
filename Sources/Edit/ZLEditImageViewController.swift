@@ -47,10 +47,19 @@ public struct ZLAdjustStatus {
     var temperature:Float = 0
     var tint:Float = 0
     var vignette:Float = 0
+    var vibrance:Float = 0
     
     
     var allValueIsZero: Bool {
-        brightness == 0 && contrast == 0 && saturation == 0 && exposure == 0 && sharpness == 0 && temperature == 0 && tint == 0 && vignette == 0
+        brightness == 0 &&
+        contrast == 0 &&
+        saturation == 0 &&
+        exposure == 0 &&
+        sharpness == 0 &&
+        temperature == 0 &&
+        tint == 0 &&
+        vignette == 0 &&
+        vibrance == 0
     }
     
     public init(brightness: Float = 0,
@@ -60,7 +69,8 @@ public struct ZLAdjustStatus {
                 shareness:Float = 0,
                 temperature:Float = 0,
                 tint:Float = 0,
-                vignette:Float = 0) {
+                vignette:Float = 0,
+                vibrance:Float = 0) {
         self.brightness = brightness
         self.contrast = contrast
         self.saturation = saturation
@@ -69,6 +79,7 @@ public struct ZLAdjustStatus {
         self.temperature = temperature
         self.tint = tint
         self.vignette = vignette
+        self.vibrance = vibrance
     }
 }
 
@@ -856,7 +867,8 @@ open class ZLEditImageViewController: UIViewController {
                 sharpness: currentAdjustStatus.sharpness,
                 temperature: currentAdjustStatus.temperature,
                 tint: currentAdjustStatus.tint,
-                vignette: currentAdjustStatus.vignette
+                vignette: currentAdjustStatus.vignette,
+                vibrance: currentAdjustStatus.vibrance
             ) ?? editImage
             
             let adjustLayout = ZLCollectionViewFlowLayout()
@@ -1157,7 +1169,9 @@ open class ZLEditImageViewController: UIViewController {
         case .tint:
             adjustSlider?.value = currentAdjustStatus.tint
         case .vignette:
-            adjustSlider?.value = currentAdjustStatus.tint
+            adjustSlider?.value = currentAdjustStatus.vignette
+        case .vibrance:
+            adjustSlider?.value = currentAdjustStatus.vibrance
         }
     }
     
@@ -1457,6 +1471,12 @@ open class ZLEditImageViewController: UIViewController {
             }
             
             currentAdjustStatus.vignette = value
+        case .vibrance:
+            if currentAdjustStatus.vibrance == value {
+                return
+            }
+            
+            currentAdjustStatus.vibrance = value
         }
         
         adjustStatusChanged()
@@ -1471,7 +1491,8 @@ open class ZLEditImageViewController: UIViewController {
             sharpness: currentAdjustStatus.sharpness,
             temperature: currentAdjustStatus.temperature,
             tint: currentAdjustStatus.tint,
-            vignette: currentAdjustStatus.vignette
+            vignette: currentAdjustStatus.vignette,
+            vibrance: currentAdjustStatus.vibrance
             
         )
         
@@ -1695,7 +1716,8 @@ open class ZLEditImageViewController: UIViewController {
                 sharpness: currentAdjustStatus.sharpness,
                 temperature: currentAdjustStatus.temperature,
                 tint: currentAdjustStatus.tint,
-                vignette: currentAdjustStatus.vignette
+                vignette: currentAdjustStatus.vignette,
+                vibrance: currentAdjustStatus.vibrance
             ) ?? image
         }
         
@@ -1763,7 +1785,8 @@ open class ZLEditImageViewController: UIViewController {
                         sharpness: currentAdjustStatus.sharpness,
                         temperature: currentAdjustStatus.temperature,
                         tint: currentAdjustStatus.tint,
-                        vignette: currentAdjustStatus.vignette
+                        vignette: currentAdjustStatus.vignette,
+                        vibrance: currentAdjustStatus.vibrance
                     )
                 }
                 

@@ -250,6 +250,8 @@ public struct ZLLocalLanguageKey: Hashable {
     public static let tint = ZLLocalLanguageKey(rawValue: "tint")
     /// vignette (晕影)
     public static let vignette = ZLLocalLanguageKey(rawValue: "vignette")
+    /// vibrance (自然饱和度)
+    public static let vibrance = ZLLocalLanguageKey(rawValue: "vibrance")
     
     /// Preview (预览)
     public static let preview = ZLLocalLanguageKey(rawValue: "preview")
