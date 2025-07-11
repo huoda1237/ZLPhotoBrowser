@@ -19,10 +19,12 @@
 "saturation" = "Canlılık";
 "exposure" = "Exposure";
 "sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="Pozlama";
+"sharpness"="Keskinlik";
+"temperature"="Renk sıcaklığı";
+"tint"="Ton";
+"vignette"="Vinyet";
+"vibrance"="Doğal canlılık";
 
 "photo" = "Fotoğrafşar";
 "preview" = "Önizle";

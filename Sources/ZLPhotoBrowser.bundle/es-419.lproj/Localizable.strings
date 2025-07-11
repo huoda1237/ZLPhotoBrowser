@@ -17,12 +17,12 @@
 "brightness" = "Brillo";
 "contrast" = "Contraste";
 "saturation" = "Saturación";
-"exposure" = "Exposure";
-"sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="Exposición";
+"sharpness"="Nitidez";
+"temperature"="Temperatura";
+"tint"="Matiz";
+"vignette"="Viñeta";
+"vibrance"="Vibrancia natural";
 
 "photo" = "Fotos";
 "preview" = "Vista previa";

@@ -17,12 +17,12 @@
 "brightness" = "明度";
 "contrast" = "コントラスト";
 "saturation" = "彩度";
-"exposure" = "Exposure";
-"sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="露出";
+"sharpness"="シャープネス";
+"temperature"="色温度";
+"tint"="色合い";
+"vignette"="ビネット";
+"vibrance"="自然な彩度";
 
 "photo" = "写真";
 "preview" = "プレビュー";

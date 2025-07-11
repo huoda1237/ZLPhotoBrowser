@@ -17,12 +17,12 @@
 "brightness" = "السطوع";
 "contrast" = "التباين";
 "saturation" = "التشبع";
-"exposure" = "曝光度";
-"sharpness" = "锐化";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="التعريض";
+"sharpness"="الحدة";
+"temperature"="درجة الحرارة اللونية";
+"tint"="درجة اللون";
+"vignette"="تظليل الحواف";
+"vibrance"="الحيوية الطبيعية";
 
 "photo" = "الصور";
 "preview" = "معاينة";

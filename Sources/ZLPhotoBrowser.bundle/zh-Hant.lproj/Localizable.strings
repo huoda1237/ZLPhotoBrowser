@@ -17,12 +17,12 @@
 "brightness" = "亮度";
 "contrast" = "對比度";
 "saturation" = "飽和度";
-"exposure" = "曝光度";
-"sharpness" = "锐化";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="曝光度";
+"sharpness"="銳化";
+"temperature"="色溫";
+"tint"="色調";
+"vignette"="暈影";
+"vibrance"="自然飽和度";
 
 "photo" = "照片";
 "preview" = "預覽";

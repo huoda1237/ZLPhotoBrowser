@@ -19,10 +19,12 @@
 "saturation" = "채도";
 "exposure" = "Exposure";
 "sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="노출";
+"sharpness"="선명도";
+"temperature"="색온도";
+"tint"="색조";
+"vignette"="비네트";
+"vibrance"="자연스러운 생동감";
 
 "photo" = "사진";
 "preview" = "미리 보기";

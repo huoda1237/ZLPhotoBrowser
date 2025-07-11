@@ -18,12 +18,12 @@
 "brightness" = "Helligkeit";
 "contrast" = "Kontrast";
 "saturation" = "Sättigung";
-"exposure" = "曝光度";
-"sharpness" = "锐化";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="Belichtung";
+"sharpness"="Schärfe";
+"temperature"="Farbtemperatur";
+"tint"="Farbton";
+"vignette"="Vignettierung";
+"vibrance"="Natürliche Sättigung";
 
 "photo" = "Fotos";
 "preview" = "Vorschau";

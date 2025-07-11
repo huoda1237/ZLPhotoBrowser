@@ -17,10 +17,10 @@
 "brightness" = "Brightness";
 "contrast" = "Contrast";
 "saturation" = "Saturation";
-"exposure" = "Exposure";
-"sharpness" = "Sharpness";
-"temperature" = "Temperature";
-"tint" = "Tint";
+"exposure"="Exposure";
+"sharpness"="Sharpness";
+"temperature"="Temperature";
+"tint"="Tint";
 "vignette"="Vignette";
 "vibrance"="Vibrance";
 

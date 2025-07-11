@@ -19,10 +19,12 @@
 "saturation" = "Saturação";
 "exposure" = "Exposure";
 "sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="Exposição";
+"sharpness"="Nitidez";
+"temperature"="Temperatura de cor";
+"tint"="Matiz";
+"vignette"="Vinheta";
+"vibrance"="Vibração natural";
 
 "photo" = "Fotos";
 "preview" = "Pré-visualização";

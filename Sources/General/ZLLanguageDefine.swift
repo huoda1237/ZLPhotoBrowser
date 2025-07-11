@@ -37,14 +37,25 @@ import Foundation
     case russian
     case vietnamese
     case korean
-    case malay
+    case malay //马来西亚
     case italian
-    case indonesian
-    case portuguese
+    case indonesian //印度尼西亚
+    case portuguese //葡萄牙
     case spanish
     case turkish
     case arabic
-    case dutch
+    case dutch //荷兰
+    
+    case polish //波兰
+    case czech //捷克
+    case swedish //瑞典
+    case slovak //斯洛伐克
+    case slovenian //斯洛文尼亚
+    case thai //泰语
+    case greek //希腊语
+    case hungarian //匈牙利语
+
+
     
     var key: String {
         var key = "en"
@@ -87,6 +98,22 @@ import Foundation
                 key = "ar"
             } else if key.hasPrefix("nl") {
                 key = "nl"
+            }else if key.hasPrefix("pl") {
+                key = "pl"
+            }else if key.hasPrefix("cs") {
+                key = "cs"
+            }else if key.hasPrefix("sv") {
+                key = "sv"
+            }else if key.hasPrefix("sk") {
+                key = "sk"
+            }else if key.hasPrefix("sl") {
+                key = "sl"
+            }else if key.hasPrefix("th") {
+                key = "th"
+            }else if key.hasPrefix("el") {
+                key = "el"
+            } else if key.hasPrefix("hu") {
+                key = "hu"
             } else {
                 key = "en"
             }
@@ -108,7 +135,7 @@ import Foundation
             key = "vi"
         case .korean:
             key = "ko"
-        case .malay:
+        case .malay: //马来西亚
             key = "ms"
         case .italian:
             key = "it"
@@ -122,8 +149,26 @@ import Foundation
             key = "tr"
         case .arabic:
             key = "ar"
-        case .dutch:
+        case .dutch: //荷兰
             key = "nl"
+            
+
+        case .polish: //波兰
+            key = "pl"
+        case .czech: //捷克
+            key = "cs"
+        case .swedish: //瑞典
+            key = "sv"
+        case .slovak: //斯洛伐克
+            key = "sk"
+        case .slovenian: //斯洛文尼亚
+            key = "sl"
+        case .thai: //泰语
+            key = "th"
+        case .greek: //希腊语
+            key = "el"
+        case .hungarian: //匈牙利语
+            key = "hu"
         }
         
         return key

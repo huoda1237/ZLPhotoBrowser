@@ -19,10 +19,12 @@
 "saturation" = "Bão hòa";
 "exposure" = "Exposure";
 "sharpness" = "Sharpness";
-"temperature" = "色温";
-"tint" = "色调";
-"vignette"="晕影";
-"vibrance"="自然饱和度";
+"exposure"="Độ phơi sáng";
+"sharpness"="Độ nét";
+"temperature"="Nhiệt độ màu";
+"tint"="Sắc thái";
+"vignette"="Hiệu ứng tối viền";
+"vibrance"="Độ bão hòa tự nhiên";
 
 "photo" = "Ảnh";
 "preview" = "Xem trước";
