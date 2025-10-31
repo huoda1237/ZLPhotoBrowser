@@ -48,6 +48,8 @@ extension ZLLanguageType {
             return "عربي (Arabic)"
         case .dutch:
             return "Nederlands (Dutch)"
+        default:
+            return "中文简体 (Chinese Simplified)"
         }
     }
     
