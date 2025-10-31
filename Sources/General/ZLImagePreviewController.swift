@@ -49,7 +49,7 @@ public class ZLImagePreviewController: UIViewController {
     
     private let datas: [Any]
     
-    private var selectStatus: [Bool]
+    public private(set) var selectStatus: [Bool]
     
     private let urlType: ((URL) -> ZLURLType)?
     
@@ -168,10 +168,13 @@ public class ZLImagePreviewController: UIViewController {
     @objc public var longPressBlock: ((_ vc: ZLImagePreviewController?, _ index: Int) -> Void)?
     
     @objc public var doneBlock: (([Any]) -> Void)?
+    @objc public var didDisappearBlock: (() -> Void)?
     
     @objc public var videoHttpHeader: [String: Any]?
     
     @objc public var netVideoCoverImageBlock: ((_ url: URL) -> UIImage?)?
+    
+    @objc public var supportInteractiveDismiss = true
     
     /// 下拉返回时，需要外界提供一个动画结束时的rect
     public var dismissTransitionFrame: ((_ index: Int) -> CGRect?)?
@@ -238,12 +241,16 @@ public class ZLImagePreviewController: UIViewController {
     
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        transitioningDelegate = self
         
         guard isFirstAppear else { return }
         isFirstAppear = false
         
         reloadCurrentCell()
+    }
+    
+    override public func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        didDisappearBlock?()
     }
     
     override public func viewDidLayoutSubviews() {
@@ -342,6 +349,9 @@ public class ZLImagePreviewController: UIViewController {
     }
     
     private func addDismissInteractiveTransition() {
+        guard supportInteractiveDismiss else { return }
+        
+        transitioningDelegate = self
         dismissInteractiveTransition = ZLImagePreviewDismissInteractiveTransition(viewController: self)
         dismissInteractiveTransition?.shouldStartTransition = { [weak self] point -> Bool in
             guard let `self` = self else { return false }

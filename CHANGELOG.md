@@ -2,6 +2,35 @@
 
 -----
 
+## [4.7.3](https://github.com/longitachi/ZLPhotoBrowser/releases/tag/4.7.3) (2025-10-17)
+### Fix:
+* Fixed the issue where the eraser position was displayed incorrectly when editing pictures. [#1025](https://github.com/longitachi/ZLPhotoBrowser/issues/1025)
+
+---
+
+## [4.7.2](https://github.com/longitachi/ZLPhotoBrowser/releases/tag/4.7.2) (2025-09-29)
+### Add:
+* Improved video editing experience:
+    * Added a shadow area mask for a clearer view of the currently selected video clip.
+    * Added a feature to display the duration of the currently selected clip.
+* The ZLImagePreviewController interface supports disabling the pull-down return gesture.
+* Change the permission of ZLPhotoPreviewSheet to private.
+
+### Fix:
+* Fixed a bug where the UI of the thumbnail interface might display an error when the permission is "limited".
+
+---
+
+## [4.7.0 ~ 4.7.0.1](https://github.com/longitachi/ZLPhotoBrowser/releases/tag/4.7.0) (2025-07-29)
+### Add:
+* Support page loading.
+* Provide a block that enables external control over whether the camera interface can be accessed.
+* Replace some deprecated APIs.
+* Support long-press gestures for more data types in ZLImagePreviewController. Support setting cover images for network videos.
+* The ZLImagePreviewController interface supports disabling the pull-down return gesture.
+
+---
+
 ## [4.6.0 ~ 4.6.0.1](https://github.com/longitachi/ZLPhotoBrowser/releases/tag/4.6.0.1) (2025-03-31)
 ### Add:
 * Support SwiftUI.

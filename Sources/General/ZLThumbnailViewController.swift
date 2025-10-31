@@ -171,7 +171,7 @@ class ZLThumbnailViewController: UIViewController {
         }
     }
     
-    private lazy var panGes: UIPanGestureRecognizer = {
+    lazy var panGes: UIPanGestureRecognizer = {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(slideSelectAction(_:)))
         pan.delegate = self
         return pan
@@ -224,6 +224,8 @@ class ZLThumbnailViewController: UIViewController {
     
     private var canPreload = false
     
+    private var dismissInteractiveTransition: ZLThumbnailDismissInteractiveTransition?
+    
     override var prefersStatusBarHidden: Bool { hiddenStatusBar }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -275,7 +277,6 @@ class ZLThumbnailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         resetBottomToolBtnStatus()
     }
     
@@ -443,6 +444,7 @@ class ZLThumbnailViewController: UIViewController {
         bottomView.addSubview(doneBtn)
         
         setupNavView()
+        setupDismissInteractiveTransition()
     }
     
     private func showNoAuthTipsView() {
@@ -493,6 +495,24 @@ class ZLThumbnailViewController: UIViewController {
         }
     }
     
+    private func setupDismissInteractiveTransition() {
+        guard ZLPhotoUIConfiguration.default().style == .embedAlbumList else {
+            return
+        }
+        
+        navigationController?.transitioningDelegate = self
+        dismissInteractiveTransition = ZLThumbnailDismissInteractiveTransition(viewController: self)
+        
+        dismissInteractiveTransition?.startTransition = {
+        }
+        
+        dismissInteractiveTransition?.cancelTransition = { [weak self] in
+        }
+        
+        dismissInteractiveTransition?.finishTransition = {
+        }
+    }
+    
     /// 获取到相册后刷新导航
     private func refreshSubviewAfterRequestAuth() {
         if showLimitAuthTipsView {
@@ -515,6 +535,7 @@ class ZLThumbnailViewController: UIViewController {
             guard self?.albumList != album else {
                 return
             }
+            
             self?.albumList = album
             self?.embedNavView?.title = album.title
             self?.loadPhotos()
@@ -1084,10 +1105,12 @@ class ZLThumbnailViewController: UIViewController {
         if uiConfig.sortAscending {
             insertIndex = arrDataSources.count
             arrDataSources.append(newModel)
+            albumList?.models.append(newModel)
         } else {
             // 保存拍照的照片或者视频，说明肯定有camera cell
             insertIndex = offset
             arrDataSources.insert(newModel, at: 0)
+            albumList?.models.insert(newModel, at: 0)
         }
         
         var canSelect = true
@@ -1132,7 +1155,10 @@ class ZLThumbnailViewController: UIViewController {
             self.collectionView.insertItems(at: [insertIndexPath])
         } completion: { _ in
             self.collectionView.scrollToItem(at: insertIndexPath, at: .centeredVertically, animated: true)
-            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            }
         }
         
         resetBottomToolBtnStatus()
@@ -1230,6 +1256,7 @@ class ZLThumbnailViewController: UIViewController {
     
     /// 预判界面执行pop动画时，该界面需要执行的内容
     func endPopTransition() {
+        collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
         hiddenStatusBar = false
         if deviceIsiPad() {
             view.setNeedsLayout()
@@ -1259,6 +1286,18 @@ extension ZLThumbnailViewController: UIGestureRecognizerDelegate {
         }
         
         return true
+    }
+}
+
+// MARK: UIViewControllerTransitioningDelegate
+
+extension ZLThumbnailViewController: UIViewControllerTransitioningDelegate {
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return dismissInteractiveTransition?.interactive == true ? ZLPhotoPreviewAnimatedTransition() : nil
+    }
+    
+    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return dismissInteractiveTransition?.interactive == true ? dismissInteractiveTransition : nil
     }
 }
 
@@ -1388,7 +1427,7 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let c = cell as? ZLThumbnailPhotoCell else {
+        guard let cell = cell as? ZLThumbnailPhotoCell else {
             return
         }
         var index = indexPath.row
@@ -1401,7 +1440,7 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
         }
         
         let model = arrDataSources[index]
-        setCellMaskView(c, isSelected: model.isSelected, model: model)
+        setCellMaskView(cell, isSelected: model.isSelected, model: model)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -1461,6 +1500,7 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
         vc.backBlock = { [weak self] in
             guard let `self` = self, self.hiddenStatusBar else { return }
             self.hiddenStatusBar = false
+            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         }
         show(vc, sender: nil)
     }

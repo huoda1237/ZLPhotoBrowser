@@ -27,8 +27,7 @@
 import UIKit
 import Photos
 
-@available(*, deprecated, message: "Please use ZLPhotoPicker instead. The permission of ZLPhotoPreviewSheet will be changed to private later.")
-public class ZLPhotoPreviewSheet: UIView {
+class ZLPhotoPreviewSheet: UIView {
     private enum Layout {
         static let colH: CGFloat = 155
         
@@ -901,7 +900,10 @@ public class ZLPhotoPreviewSheet: UIView {
             self.collectionView.insertItems(at: [insertIndexPath])
         } completion: { _ in
             self.collectionView.scrollToItem(at: insertIndexPath, at: .centeredHorizontally, animated: true)
-            self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
+            }
         }
         
         changeCancelBtnTitle()
