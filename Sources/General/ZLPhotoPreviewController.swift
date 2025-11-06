@@ -594,6 +594,10 @@ class ZLPhotoPreviewController: UIViewController {
     }
     
     @objc private func selectBtnClick() {
+        selectImageItem()
+    }
+    
+    func selectImageItem(block:Bool = false)  {
         guard let nav = navigationController as? ZLImageNavController else {
             zlLoggerInDebug("Navigation controller is null")
             return
@@ -628,6 +632,16 @@ class ZLPhotoPreviewController: UIViewController {
                 config.didSelectAsset?(currentModel.asset)
                 
                 self?.resetSubviewStatus()
+                
+                if block == true && self != nil {
+                    if let block = ZLPhotoConfiguration.default().operateBeforeDoneAction {
+                        block(self!) { [weak nav] in
+                            nav?.selectImageBlock?()
+                        }
+                    } else {
+                        nav.selectImageBlock?()
+                    }
+                }
             }
         }
     }
@@ -731,13 +745,15 @@ class ZLPhotoPreviewController: UIViewController {
         guard canAddModel(currentModel, currentSelectCount: nav.arrSelectedModels.count, sender: self) else {
             return
         }
-        
-        downloadAssetIfNeed(model: currentModel, sender: self) { [weak nav] in
-            nav?.arrSelectedModels.append(currentModel)
-            ZLPhotoConfiguration.default().didSelectAsset?(currentModel.asset)
-            
-            callbackBeforeDone()
-        }
+        //选中当前的图片
+        selectImageItem(block: true)
+//        selectBtnClick()
+//        downloadAssetIfNeed(model: currentModel, sender: self) { [weak nav] in
+//            nav?.arrSelectedModels.append(currentModel)
+//            ZLPhotoConfiguration.default().didSelectAsset?(currentModel.asset)
+//            
+//            callbackBeforeDone()
+//        }
     }
     
     private func scrollToSelPreviewCell(_ model: ZLPhotoModel, findForward: Bool = true) {
