@@ -27,7 +27,7 @@
 import UIKit
 import Photos
 
-public class ZLImageNavController: UINavigationController {
+open class ZLImageNavController: UINavigationController {
     var isSelectedOriginal = false
     
     var arrSelectedModels: [ZLPhotoModel] = []
@@ -44,11 +44,11 @@ public class ZLImageNavController: UINavigationController {
         return ZLPhotoUIConfiguration.default().statusBarStyle
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
     
-    override init(rootViewController: UIViewController) {
+    public override init(rootViewController: UIViewController) {
         super.init(rootViewController: rootViewController)
         navigationBar.barStyle = .black
         navigationBar.isTranslucent = true
@@ -57,7 +57,7 @@ public class ZLImageNavController: UINavigationController {
     }
     
     @available(*, unavailable)
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

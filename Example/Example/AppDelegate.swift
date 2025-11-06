@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ZLPhotoBrowser
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let nav = UINavigationController(rootViewController: ViewController())
+        let nav = BaseNavcViewController(rootViewController: ViewController())
         self.window?.rootViewController = nav
         
         self.window?.makeKeyAndVisible()

@@ -138,18 +138,49 @@ public class ZLPhotoPicker: NSObject {
         self.sender = sender
         
         let nav: ZLImageNavController
+//        if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
+//            let tvc = ZLThumbnailViewController(albumList: nil)
+//            nav = getImageNav(rootViewController: tvc)
+//        } else {
+//            nav = getImageNav(rootViewController: ZLAlbumListController())
+//            let tvc = ZLThumbnailViewController(albumList: nil)
+//            nav.pushViewController(tvc, animated: true)
+//        }
+//        
+//        sender.present(nav, animated: true) {
+//            self.previewSheet?.hide()
+//        }
+        
+        
         if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
             let tvc = ZLThumbnailViewController(albumList: nil)
-            nav = getImageNav(rootViewController: tvc)
+            if let curNav = sender.navigationController as? ZLImageNavController {
+                nav = curNav
+                nav.selectImageBlock = { [weak nav] in
+                    self.requestSelectPhoto(
+                        models: nav?.arrSelectedModels ?? [],
+                        isSelectOriginal: nav?.isSelectedOriginal ?? false,
+                        viewController: nav
+                    )
+                }
+                
+                nav.cancelBlock = {
+                    self.cancel()
+                }
+                nav.isSelectedOriginal = isSelectOriginal
+                nav.arrSelectedModels.removeAll()
+                nav.arrSelectedModels.append(contentsOf: arrSelectedModels)
+            } else {
+                nav = getImageNav(rootViewController: UIViewController())
+            }
+            sender.navigationController?.pushViewController(tvc, animated: true)
+           
         } else {
             nav = getImageNav(rootViewController: ZLAlbumListController())
             let tvc = ZLThumbnailViewController(albumList: nil)
             nav.pushViewController(tvc, animated: true)
         }
         
-        sender.present(nav, animated: true) {
-            self.previewSheet?.hide()
-        }
         
         return nav
     }
@@ -267,9 +298,9 @@ public class ZLPhotoPicker: NSObject {
             }
             
             if let vc = viewController {
-                vc.dismiss(animated: true) {
+//                vc.dismiss(animated: true) {
                     call()
-                }
+//                }
             } else {
                 self?.previewSheet?.hide {
                     call()

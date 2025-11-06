@@ -193,6 +193,7 @@ class ViewController: UIViewController {
              .allowSwitchCamera(false)
              .showFlashSwitch(true)
           */
+        
         ZLPhotoConfiguration.default()
             // You can first determine whether the asset is allowed to be selected.
             .canSelectAsset { _ in true }
@@ -259,6 +260,10 @@ class ViewController: UIViewController {
             debugPrint("assets: \(self.selectedAssets)")
             debugPrint("isEdited: \(results.map { $0.isEdited })")
             debugPrint("isOriginal: \(isOriginal)")
+            
+            let vb = UIViewController()
+            vb.view.backgroundColor = UIColor.red
+            self.navigationController?.pushViewController(vb, animated: true)
             
 //            guard !self.selectedAssets.isEmpty else { return }
 //            self.saveAsset(self.selectedAssets[0])
