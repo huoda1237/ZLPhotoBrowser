@@ -10,6 +10,8 @@ import ZLPhotoBrowser
 
 class BaseNavcViewController: ZLImageNavController {
 
-
+    override func viewDidLoad() {
+        
+    }
 
 }
