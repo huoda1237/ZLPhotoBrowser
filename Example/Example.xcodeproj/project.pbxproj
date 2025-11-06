@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21FD1D272EBC43AD0085AF92 /* BaseNavcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FD1D262EBC43AD0085AF92 /* BaseNavcViewController.swift */; };
+		21FD1D592EBC6C1F0085AF92 /* yyyyyyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21FD1D582EBC6C1F0085AF92 /* yyyyyyViewController.swift */; };
 		E42F8ADB25CA9CDF009775A3 /* WeChatMomentDemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42F8ADA25CA9CDF009775A3 /* WeChatMomentDemoViewController.swift */; };
 		E44A20F02567763A00FE6CAE /* ImageStickerContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44A20EF2567763A00FE6CAE /* ImageStickerContainerView.swift */; };
 		E462467024EE6F9A00EF6C57 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E462466F24EE6F9A00EF6C57 /* ImageCell.swift */; };
@@ -135,6 +136,7 @@
 
 /* Begin PBXFileReference section */
 		21FD1D262EBC43AD0085AF92 /* BaseNavcViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavcViewController.swift; sourceTree = "<group>"; };
+		21FD1D582EBC6C1F0085AF92 /* yyyyyyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = yyyyyyViewController.swift; sourceTree = "<group>"; };
 		BAFFA5482773B655007C3811 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
 		BAFFA5492773B655007C3811 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BAFFA54A2773B65B007C3811 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 				21FD1D262EBC43AD0085AF92 /* BaseNavcViewController.swift */,
 				E480050725316920008A2B67 /* ZLCustomFilter.swift */,
 				E4A4109624F39DF700EEC20B /* PhotoConfigureViewController.swift */,
+				21FD1D582EBC6C1F0085AF92 /* yyyyyyViewController.swift */,
 				E4C69FED253EDA8600AE466C /* PhotoConfigureCNViewController.swift */,
 				E42F8ADA25CA9CDF009775A3 /* WeChatMomentDemoViewController.swift */,
 				E4C69FEB253ED19600AE466C /* LanguagePickerView.swift */,
@@ -624,6 +627,7 @@
 				E480050825316920008A2B67 /* ZLCustomFilter.swift in Sources */,
 				E4A410CE24F39F0000EEC20B /* ConstraintMakerRelatable+Extensions.swift in Sources */,
 				E4A410E524F39F0000EEC20B /* ConstraintMakerRelatable.swift in Sources */,
+				21FD1D592EBC6C1F0085AF92 /* yyyyyyViewController.swift in Sources */,
 				E4A410D124F39F0000EEC20B /* ConstraintView.swift in Sources */,
 				FD0F5AC52AFDDA1800EE83F3 /* GIFAnimatedImage.swift in Sources */,
 				E4A410DD24F39F0000EEC20B /* Constraint.swift in Sources */,

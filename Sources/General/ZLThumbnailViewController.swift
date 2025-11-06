@@ -471,10 +471,13 @@ class ZLThumbnailViewController: UIViewController {
             }
             
             embedNavView?.cancelBlock = { [weak self] in
+//                let nav = self?.navigationController as? ZLImageNavController
+//                nav?.dismiss(animated: true, completion: {
+//                    nav?.cancelBlock?()
+//                })
                 let nav = self?.navigationController as? ZLImageNavController
-                nav?.dismiss(animated: true, completion: {
-                    nav?.cancelBlock?()
-                })
+                nav?.cancelBlock?()
+                self?.navigationController?.popViewController(animated: true)
             }
             
             view.addSubview(embedNavView!)

@@ -261,9 +261,7 @@ class ViewController: UIViewController {
             debugPrint("isEdited: \(results.map { $0.isEdited })")
             debugPrint("isOriginal: \(isOriginal)")
             
-            let vb = UIViewController()
-            vb.view.backgroundColor = UIColor.red
-            self.navigationController?.pushViewController(vb, animated: true)
+            self.navigationController?.pushViewController(yyyyyyViewController(), animated: true)
             
 //            guard !self.selectedAssets.isEmpty else { return }
 //            self.saveAsset(self.selectedAssets[0])
