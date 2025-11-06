@@ -223,7 +223,7 @@ class ZLPhotoPreviewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.delegate = self
+//        navigationController?.delegate = self
         
         guard isFirstAppear else { return }
         isFirstAppear = false
@@ -845,19 +845,19 @@ class ZLPhotoPreviewController: UIViewController {
     }
 }
 
-extension ZLPhotoPreviewController: UINavigationControllerDelegate {
-    func navigationController(_: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from _: UIViewController, to _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .push {
-            return nil
-        }
-        
-        return popInteractiveTransition?.interactive == true ? ZLPhotoPreviewAnimatedTransition() : nil
-    }
-    
-    func navigationController(_: UINavigationController, interactionControllerFor _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        return popInteractiveTransition?.interactive == true ? popInteractiveTransition : nil
-    }
-}
+//extension ZLPhotoPreviewController: UINavigationControllerDelegate {
+//    func navigationController(_: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from _: UIViewController, to _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        if operation == .push {
+//            return nil
+//        }
+//        
+//        return popInteractiveTransition?.interactive == true ? ZLPhotoPreviewAnimatedTransition() : nil
+//    }
+//    
+//    func navigationController(_: UINavigationController, interactionControllerFor _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        return popInteractiveTransition?.interactive == true ? popInteractiveTransition : nil
+//    }
+//}
 
 // MARK: scroll view delegate
 

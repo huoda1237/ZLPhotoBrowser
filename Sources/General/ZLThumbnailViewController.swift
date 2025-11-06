@@ -1505,7 +1505,8 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
             self.hiddenStatusBar = false
             self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         }
-        show(vc, sender: nil)
+//        show(vc, sender: nil)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     private func shouldDirectEdit(_ model: ZLPhotoModel) -> Bool {
