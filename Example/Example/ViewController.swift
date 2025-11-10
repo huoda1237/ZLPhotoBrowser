@@ -277,7 +277,8 @@ class ViewController: UIViewController {
         if preview {
             picker.showPreview(animate: true, sender: self)
         } else {
-            picker.showPhotoLibrary(sender: self)
+//            picker.showPhotoLibrary(sender: self)
+            picker.pushPhotoLibrary(sender: self)
         }
     }
     

@@ -307,9 +307,13 @@ public class ZLPhotoPicker: NSObject {
             }
             
             if let vc = viewController {
-//                vc.dismiss(animated: true) {
+                if ZLPhotoUIConfiguration.default().isPushMode == true {
                     call()
-//                }
+                } else {
+                    vc.dismiss(animated: true) {
+                        call()
+                    }
+                }
             } else {
                 self?.previewSheet?.hide {
                     call()
