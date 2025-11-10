@@ -13,11 +13,18 @@ class yyyyyyViewController: UIViewController {
         super.viewDidLoad()
 
         self.view.backgroundColor = .green
+        self.title = "1111"
     }
     
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+
     }
 
 }

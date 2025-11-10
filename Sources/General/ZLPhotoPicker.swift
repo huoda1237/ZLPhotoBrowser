@@ -136,23 +136,30 @@ public class ZLPhotoPicker: NSObject {
     @discardableResult
     @objc public func showPhotoLibrary(sender: UIViewController) -> ZLImageNavController {
         self.sender = sender
+        ZLPhotoUIConfiguration.default().isPushMode = false
+        let nav: ZLImageNavController
+        if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
+            let tvc = ZLThumbnailViewController(albumList: nil)
+            nav = getImageNav(rootViewController: tvc)
+        } else {
+            nav = getImageNav(rootViewController: ZLAlbumListController())
+            let tvc = ZLThumbnailViewController(albumList: nil)
+            nav.pushViewController(tvc, animated: true)
+        }
+        sender.present(nav, animated: true) {
+            self.previewSheet?.hide()
+        }
+        return nav
+    }
+    
+    /// - Warning: When calling this method in OC language, make sure that the `sender` is not nil
+    @discardableResult
+    @objc public func pushPhotoLibrary(sender: UIViewController) -> ZLImageNavController {
+        self.sender = sender
         
         let nav: ZLImageNavController
-//        if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
-//            let tvc = ZLThumbnailViewController(albumList: nil)
-//            nav = getImageNav(rootViewController: tvc)
-//        } else {
-//            nav = getImageNav(rootViewController: ZLAlbumListController())
-//            let tvc = ZLThumbnailViewController(albumList: nil)
-//            nav.pushViewController(tvc, animated: true)
-//        }
-//        
-//        sender.present(nav, animated: true) {
-//            self.previewSheet?.hide()
-//        }
-        
-        
         if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
+            ZLPhotoUIConfiguration.default().isPushMode = true
             let tvc = ZLThumbnailViewController(albumList: nil)
             if let curNav = sender.navigationController as? ZLImageNavController {
                 nav = curNav
@@ -174,16 +181,18 @@ public class ZLPhotoPicker: NSObject {
                 nav = getImageNav(rootViewController: UIViewController())
             }
             sender.navigationController?.pushViewController(tvc, animated: true)
-           
         } else {
+            ZLPhotoUIConfiguration.default().isPushMode = false
             nav = getImageNav(rootViewController: ZLAlbumListController())
             let tvc = ZLThumbnailViewController(albumList: nil)
             nav.pushViewController(tvc, animated: true)
+            sender.present(nav, animated: true) {
+                self.previewSheet?.hide()
+            }
         }
-        
-        
         return nav
     }
+    
     
     /// 传入已选择的assets，并预览
     @objc public func previewAssets(

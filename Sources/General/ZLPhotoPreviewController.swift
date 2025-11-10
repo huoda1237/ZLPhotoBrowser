@@ -223,7 +223,9 @@ class ZLPhotoPreviewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        navigationController?.delegate = self
+        if  ZLPhotoUIConfiguration.default().isPushMode == false {
+            navigationController?.delegate = self
+        }
         
         guard isFirstAppear else { return }
         isFirstAppear = false
@@ -745,15 +747,18 @@ class ZLPhotoPreviewController: UIViewController {
         guard canAddModel(currentModel, currentSelectCount: nav.arrSelectedModels.count, sender: self) else {
             return
         }
-        //选中当前的图片
-        selectImageItem(block: true)
-//        selectBtnClick()
-//        downloadAssetIfNeed(model: currentModel, sender: self) { [weak nav] in
-//            nav?.arrSelectedModels.append(currentModel)
-//            ZLPhotoConfiguration.default().didSelectAsset?(currentModel.asset)
-//            
-//            callbackBeforeDone()
-//        }
+        
+        if ZLPhotoUIConfiguration.default().isPushMode == true {
+            //选中当前的图片
+            selectImageItem(block: true)
+        } else {
+            downloadAssetIfNeed(model: currentModel, sender: self) { [weak nav] in
+                nav?.arrSelectedModels.append(currentModel)
+                ZLPhotoConfiguration.default().didSelectAsset?(currentModel.asset)
+                
+                callbackBeforeDone()
+            }
+        }
     }
     
     private func scrollToSelPreviewCell(_ model: ZLPhotoModel, findForward: Bool = true) {
@@ -861,19 +866,19 @@ class ZLPhotoPreviewController: UIViewController {
     }
 }
 
-//extension ZLPhotoPreviewController: UINavigationControllerDelegate {
-//    func navigationController(_: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from _: UIViewController, to _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-//        if operation == .push {
-//            return nil
-//        }
-//        
-//        return popInteractiveTransition?.interactive == true ? ZLPhotoPreviewAnimatedTransition() : nil
-//    }
-//    
-//    func navigationController(_: UINavigationController, interactionControllerFor _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-//        return popInteractiveTransition?.interactive == true ? popInteractiveTransition : nil
-//    }
-//}
+extension ZLPhotoPreviewController: UINavigationControllerDelegate {
+    func navigationController(_: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from _: UIViewController, to _: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push {
+            return nil
+        }
+        
+        return popInteractiveTransition?.interactive == true ? ZLPhotoPreviewAnimatedTransition() : nil
+    }
+    
+    func navigationController(_: UINavigationController, interactionControllerFor _: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return popInteractiveTransition?.interactive == true ? popInteractiveTransition : nil
+    }
+}
 
 // MARK: scroll view delegate
 

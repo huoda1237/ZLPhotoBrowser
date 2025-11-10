@@ -24,7 +24,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = UIColor.red
+        self.navigationController?.isNavigationBarHidden = false
         setupUI()
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
     
     func setupUI() {
         title = "Main"
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         
         func createBtn(_ title: String, _ action: Selector) -> UIButton {
             let btn = UIButton(type: .custom)

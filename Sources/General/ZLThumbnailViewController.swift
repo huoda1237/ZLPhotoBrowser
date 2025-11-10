@@ -471,13 +471,16 @@ class ZLThumbnailViewController: UIViewController {
             }
             
             embedNavView?.cancelBlock = { [weak self] in
-//                let nav = self?.navigationController as? ZLImageNavController
-//                nav?.dismiss(animated: true, completion: {
-//                    nav?.cancelBlock?()
-//                })
-                let nav = self?.navigationController as? ZLImageNavController
-                nav?.cancelBlock?()
-                self?.navigationController?.popViewController(animated: true)
+                if ZLPhotoUIConfiguration.default().isPushMode == true {
+                    let nav = self?.navigationController as? ZLImageNavController
+                    nav?.cancelBlock?()
+                    self?.navigationController?.popViewController(animated: true)
+                } else {
+                    let nav = self?.navigationController as? ZLImageNavController
+                    nav?.dismiss(animated: true, completion: {
+                        nav?.cancelBlock?()
+                    })
+                }
             }
             
             view.addSubview(embedNavView!)
@@ -1505,8 +1508,11 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
             self.hiddenStatusBar = false
             self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         }
-//        show(vc, sender: nil)
-        self.navigationController?.pushViewController(vc, animated: true)
+        if ZLPhotoUIConfiguration.default().isPushMode == true {
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            show(vc, sender: nil)
+        }
     }
     
     private func shouldDirectEdit(_ model: ZLPhotoModel) -> Bool {
