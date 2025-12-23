@@ -223,7 +223,8 @@ class ZLThumbnailViewController: UIViewController {
     private var didLayout = false
     
     private var canPreload = false
-    
+    //是否是使用push的方式
+    public var isPushMode: Bool = false
     private var dismissInteractiveTransition: ZLThumbnailDismissInteractiveTransition?
     
     override var prefersStatusBarHidden: Bool { hiddenStatusBar }
@@ -471,7 +472,7 @@ class ZLThumbnailViewController: UIViewController {
             }
             
             embedNavView?.cancelBlock = { [weak self] in
-                if ZLPhotoUIConfiguration.default().isPushMode == true {
+                if self?.isPushMode == true {
                     let nav = self?.navigationController as? ZLImageNavController
                     nav?.cancelBlock?()
                     self?.navigationController?.popViewController(animated: true)
@@ -700,6 +701,7 @@ class ZLThumbnailViewController: UIViewController {
             return
         }
         let vc = ZLPhotoPreviewController(photos: nav.arrSelectedModels, index: 0)
+        vc.isPushMode = self.isPushMode
         vc.backBlock = { [weak self] in
             guard let `self` = self, self.hiddenStatusBar else { return }
             self.hiddenStatusBar = false
@@ -1497,6 +1499,7 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
         }
         
         let vc = ZLPhotoPreviewController(photos: arrDataSources, index: index)
+        vc.isPushMode = self.isPushMode
         if uiConfig.allowPageLoading {
             vc.preloadBlock = { [weak self] loadAll in
                 self?.preloadPhotos(loadAll: loadAll, force: true) ?? []
@@ -1508,7 +1511,7 @@ extension ZLThumbnailViewController: UICollectionViewDataSource, UICollectionVie
             self.hiddenStatusBar = false
             self.collectionView.reloadItems(at: self.collectionView.indexPathsForVisibleItems)
         }
-        if ZLPhotoUIConfiguration.default().isPushMode == true {
+        if self.isPushMode == true {
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
             show(vc, sender: nil)

@@ -35,7 +35,8 @@ public class ZLPhotoPicker: NSObject {
     private weak var previewSheet: ZLPhotoPreviewSheet?
     
     private var isSelectOriginal = false
-    
+    //是否是使用push的方式
+    public var isPushMode: Bool = false
     private lazy var fetchImageQueue: OperationQueue = {
         let queue = OperationQueue()
         queue.maxConcurrentOperationCount = 3
@@ -136,7 +137,6 @@ public class ZLPhotoPicker: NSObject {
     @discardableResult
     @objc public func showPhotoLibrary(sender: UIViewController) -> ZLImageNavController {
         self.sender = sender
-        ZLPhotoUIConfiguration.default().isPushMode = false
         let nav: ZLImageNavController
         if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
             let tvc = ZLThumbnailViewController(albumList: nil)
@@ -159,8 +159,9 @@ public class ZLPhotoPicker: NSObject {
         
         let nav: ZLImageNavController
         if ZLPhotoUIConfiguration.default().style == .embedAlbumList {
-            ZLPhotoUIConfiguration.default().isPushMode = true
+            self.isPushMode = true
             let tvc = ZLThumbnailViewController(albumList: nil)
+            tvc.isPushMode = true
             if let curNav = sender.navigationController as? ZLImageNavController {
                 nav = curNav
                 nav.selectImageBlock = { [weak nav] in
@@ -182,7 +183,6 @@ public class ZLPhotoPicker: NSObject {
             }
             sender.navigationController?.pushViewController(tvc, animated: true)
         } else {
-            ZLPhotoUIConfiguration.default().isPushMode = false
             nav = getImageNav(rootViewController: ZLAlbumListController())
             let tvc = ZLThumbnailViewController(albumList: nil)
             nav.pushViewController(tvc, animated: true)
@@ -307,7 +307,7 @@ public class ZLPhotoPicker: NSObject {
             }
             
             if let vc = viewController {
-                if ZLPhotoUIConfiguration.default().isPushMode == true {
+                if self?.isPushMode == true {
                     call()
                 } else {
                     vc.dismiss(animated: true) {

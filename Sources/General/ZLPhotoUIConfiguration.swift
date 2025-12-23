@@ -51,8 +51,7 @@ public class ZLPhotoUIConfiguration: NSObject {
     public var sortAscending = true
     
     public var style: ZLPhotoBrowserStyle = .embedAlbumList
-    //是否是使用push的方式
-    public var isPushMode: Bool = false
+
     public var statusBarStyle: UIStatusBarStyle = .lightContent
     
     /// text: Cancel.  image: 'x'. Defaults to image.

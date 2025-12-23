@@ -31,7 +31,8 @@ class ZLPhotoPreviewController: UIViewController {
     static let colItemSpacing: CGFloat = 40
     
     static let selPhotoPreviewH: CGFloat = 100
-    
+    //是否是使用push的方式
+    public var isPushMode: Bool = false
     static let previewVCScrollNotification = Notification.Name("previewVCScrollNotification")
     
     var arrDataSources: [ZLPhotoModel]
@@ -223,7 +224,7 @@ class ZLPhotoPreviewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if  ZLPhotoUIConfiguration.default().isPushMode == false {
+        if  self.isPushMode == false {
             navigationController?.delegate = self
         }
         
@@ -748,7 +749,7 @@ class ZLPhotoPreviewController: UIViewController {
             return
         }
         
-        if ZLPhotoUIConfiguration.default().isPushMode == true {
+        if self.isPushMode == true {
             //选中当前的图片
             selectImageItem(block: true)
         } else {
